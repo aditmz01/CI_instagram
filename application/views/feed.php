@@ -12,9 +12,32 @@
     <title>Feed | Vietgram</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-
+<style>
+    #panelUpload{
+        margin-bottom: 10px;
+        align-items: center;
+        height : 100px;
+        width: 300px;
+    }
+    #panelUpload input{
+        padding : 10px;
+    }
+    #buttonUpload{
+        padding : 10px;
+    }
+    .panel-primary > .panel-heading {
+        background-color: black;
+    }
+    .btn-danger{
+        background-color: black;
+        border : 2px black;
+    }
+</style>
 <body>
     <nav class="navigation">
         <div class="navigation__column">
@@ -52,11 +75,18 @@
             </ul>
         </div>
     </nav>
-
+    
     <main id="feed">
+        <div class="panel panel-primary" id="panelUpload">
+            <div class="panel-heading"><center>Upload New Photo</center></div>
+                <div id=buttonUpload>
+                    <center><button class="btn btn-danger" data-toggle="modal" data-target="#upload">UPLOAD</button></center>
+                </div>
+            </div>
         <?php
           for ($i=0; $i < $jmlData; $i++) { 
         ?>
+        
         <div class="photo">
             <header class="photo__header">
                 <img src="assets/images/avatar.jpg" class="photo__avatar" />
@@ -107,6 +137,34 @@
             <span class="footer__copyright">© 2017 Vietgram</span>
         </div>
     </footer>
+
+    <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <center>
+                        <h2>Upload Your Photo</h2>
+                    </center>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="<?php echo base_url(); ?>"feed/upload>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Caption</label>
+                            <input type="text" class="form-control" placeholder="Masukkan Caption Disini" name="caption" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Url Foto</label>
+                            <input type="file" class="form-control" name="image" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" id="hapus" value="Submit" placeholder="Simpan">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
                 $(document).ready(function(){
                     $('#search').keyup(function(){

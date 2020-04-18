@@ -3,10 +3,10 @@
 <?php 
     
     $data_photo = $this->db->query("select * from photo where username='". $_SESSION['username']. "'");
-    $jmlData = $data_photo->num_rows();
+    $data = $this->db->where('username', $_SESSION['username']);
     $data = $this->db->get('profile')->row_array();
-    foreach($data_photo->result() as $row[]){
-        } 
+    $jmlData = $data_photo->num_rows();
+    foreach($data_photo->result() as $row[]){} 
 ?>
 <head>
     <meta charset="UTF-8">

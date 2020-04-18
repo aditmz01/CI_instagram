@@ -1,7 +1,7 @@
 <?php 
     // session_start();
     $data_photo = $this->db->query("select * from photo where username='". $_SESSION['username']. "'");
-    // $data_profile = $this->db->where('username', $username);
+    $data = $this->db->where('username', $_SESSION['username']);
     $data = $this->db->get('profile')->row_array();
     $jmlData = $data_photo->num_rows();
     foreach($data_photo->result() as $row[]){} 

@@ -34,7 +34,25 @@ class model_IG extends CI_Model{
 			"gender" => $this->input->post('gender', true),
 		];
 		$this->db->where('username', $username);
-        return $this->db->update('profile', $data);
+		return $this->db->update('profile', $data);
+	}
+	public function insert_user($data1,$data2){
+		$insert1 = $this->db->insert('user', $data1);
+		$insert2 = $this->db->insert('profile', $data2);
+		if($insert1 && $insert2){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function check_username($username){
+		$query = $this->db->where('username',$username)->get('user');
+		$count = $query->num_rows();
+		if($count > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 ?>
